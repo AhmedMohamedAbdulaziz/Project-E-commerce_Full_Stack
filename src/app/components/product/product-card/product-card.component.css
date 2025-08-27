@@ -1,0 +1,92 @@
+
+.card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-radius: 1rem !important;
+   margin-bottom: 20px;
+}
+
+.card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+
+.product-img {
+  max-height: 220px;
+  object-fit: contain;
+  padding: 15px;
+  background: #f8f9fa;
+  border-bottom: 1px solid #eee;
+}
+
+
+.card-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 0.8rem;
+}
+
+.price {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #672c2c;
+  margin-bottom: 0.6rem;
+}
+
+
+.stock {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.in-stock {
+  background-color: #e8f5e9;
+  color: #388e3c;
+}
+
+.out-stock {
+  background-color: #ffebee;
+  color: #d32f2f;
+}
+
+
+.rating {
+  font-size: 0.95rem;
+  color: #ffc107;
+  margin-bottom: 1rem;
+}
+
+
+.btn {
+  border-radius: 30px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+
+.btn-outline-primary {
+  border: 2px solid hsl(13, 12%, 70%);
+  color: #532a2a;
+}
+
+.btn-outline-primary:hover {
+  background-color: #532a2a;
+  color: #fff;
+}
+
+
+.btn-success {
+  background-color: #532a2a;
+  border: none;
+}
+
+.btn-success:hover {
+  background-color: #fffbf8;
+  color: #532a2a;
+  border: 2px solid hsl(13, 12%, 70%)
+}

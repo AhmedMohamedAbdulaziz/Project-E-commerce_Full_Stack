@@ -1,0 +1,30 @@
+<form [formGroup]="updateForm" (ngSubmit)="onUpdate()" novalidate>
+  <div class="mb-3">
+    <label>Title</label>
+    <input type="text" formControlName="title" class="form-control">
+  </div>
+
+  <div class="mb-3">
+    <label>Description</label>
+    <textarea formControlName="description" class="form-control"></textarea>
+  </div>
+
+  <div class="mb-3">
+    <label>Price</label>
+    <input type="number" formControlName="price" class="form-control">
+  </div>
+
+  <div class="mb-3">
+    <label>Stock</label>
+    <input type="number" formControlName="stock" class="form-control">
+  </div>
+
+  <div class="mb-3">
+    <label>Image</label>
+    <input type="file" (change)="onFileSelect($event)" class="form-control">
+  </div>
+
+  <button type="submit" class="btn btn-warning w-100">
+    Update Product
+  </button>
+</form>
