@@ -7,13 +7,13 @@
     <form [formGroup]="updateForm" (ngSubmit)="onUpdate()" class="add-form" novalidate>
 
       <div class="mb-3">
-        <label for="title" class="form-label">Title</label>
+        <label for="name" class="form-label">Title</label>
         <input type="text" id="title" class="form-control" formControlName="title">
 
-        @if(formControls['title'].invalid && (formControls['title'].touched || submitted)) {
+        @if(formControls['name'].invalid && (formControls['name'].touched || submitted)) {
           <div class="form-text text-danger">
-            @if(formControls['title'].errors?.['required']) { <span>Title is required</span> }
-            @if(formControls['title'].errors?.['minlength']) { <span>Title must be at least 3 characters</span> }
+            @if(formControls['name'].errors?.['required']) { <span>Title is required</span> }
+            @if(formControls['name'].errors?.['minlength']) { <span>Title must be at least 3 characters</span> }
           </div>
         }
       </div>
