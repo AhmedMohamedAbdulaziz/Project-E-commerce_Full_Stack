@@ -1,30 +1,68 @@
-<form [formGroup]="updateForm" (ngSubmit)="onUpdate()" novalidate>
-  <div class="mb-3">
-    <label>Title</label>
-    <input type="text" formControlName="title" class="form-control">
-  </div>
+<div class="add-container">
+  <div class="add-card">
+    <div class="add-header">
+      <h2>Update Product</h2>
+    </div>
 
-  <div class="mb-3">
-    <label>Description</label>
-    <textarea formControlName="description" class="form-control"></textarea>
-  </div>
+    <form [formGroup]="updateForm" (ngSubmit)="onUpdate()" class="add-form" novalidate>
 
-  <div class="mb-3">
-    <label>Price</label>
-    <input type="number" formControlName="price" class="form-control">
-  </div>
+      <div class="mb-3">
+        <label for="title" class="form-label">Title</label>
+        <input type="text" id="title" class="form-control" formControlName="title">
 
-  <div class="mb-3">
-    <label>Stock</label>
-    <input type="number" formControlName="stock" class="form-control">
-  </div>
+        @if(formControls['title'].invalid && (formControls['title'].touched || submitted)) {
+          <div class="form-text text-danger">
+            @if(formControls['title'].errors?.['required']) { <span>Title is required</span> }
+            @if(formControls['title'].errors?.['minlength']) { <span>Title must be at least 3 characters</span> }
+          </div>
+        }
+      </div>
 
-  <div class="mb-3">
-    <label>Image</label>
-    <input type="file" (change)="onFileSelect($event)" class="form-control">
-  </div>
+      <div class="mb-3">
+        <label for="description" class="form-label">Description</label>
+        <textarea id="description" class="form-control" formControlName="description"></textarea>
 
-  <button type="submit" class="btn btn-warning w-100">
-    Update Product
-  </button>
-</form>
+        @if(formControls['description'].invalid && (formControls['description'].touched || submitted)) {
+          <div class="form-text text-danger">
+            @if(formControls['description'].errors?.['required']) { <span>Description is required</span> }
+            @if(formControls['description'].errors?.['minlength']) { <span>Description must be at least 5 characters</span> }
+          </div>
+        }
+      </div>
+
+      <div class="mb-3">
+        <label for="price" class="form-label">Price</label>
+        <input type="number" id="price" class="form-control" formControlName="price">
+
+        @if(formControls['price'].invalid && (formControls['price'].touched || submitted)) {
+          <div class="form-text text-danger">
+            @if(formControls['price'].errors?.['required']) { <span>Price is required</span> }
+            @if(formControls['price'].errors?.['min']) { <span>Price must be at least 0</span> }
+          </div>
+        }
+      </div>
+
+      <div class="mb-3">
+        <label for="stock" class="form-label">Stock</label>
+        <input type="number" id="stock" class="form-control" formControlName="stock">
+
+        @if(formControls['stock'].invalid && (formControls['stock'].touched || submitted)) {
+          <div class="form-text text-danger">
+            @if(formControls['stock'].errors?.['required']) { <span>Stock is required</span> }
+            @if(formControls['stock'].errors?.['min']) { <span>Stock cannot be negative</span> }
+          </div>
+        }
+      </div>
+
+      <div class="mb-3">
+        <label for="image" class="form-label">Product Image</label>
+        <input type="file" id="image" class="form-control" (change)="onFileSelect($event)">
+      </div>
+
+      <button type="submit" class="btn btn-primary w-100" [disabled]="updateForm.invalid">
+        Update Product
+      </button>
+
+    </form>
+  </div>
+</div>
