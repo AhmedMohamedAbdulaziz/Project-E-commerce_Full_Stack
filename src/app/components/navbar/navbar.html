@@ -20,16 +20,15 @@
           <a class="nav-link" routerLink="/products">Products</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/home">About</a>
+          <a class="nav-link" routerLink="/products">About</a>
         </li>
-
-        <!-- @if (currentUser?.isAdmin) {
+        @if (currentUser?.role === 'admin') {
           <li class="nav-item">
             <a class="nav-link" routerLink="/admin" style="color: #ffc107 !important;">
               <i class="fa fa-cog"></i> Admin
             </a>
           </li>
-        } -->
+        }
       </ul>
 
       <ul class="navbar-nav">
@@ -48,47 +47,33 @@
 
         <!-- User Authentication -->
         @if (currentUser) {
-        <li class="nav-item dropdown">
-          <a
-            class="nav-link dropdown-toggle"
-            href="#"
-            role="button"
-            data-bs-toggle="dropdown"
-          >
-            <i class="fa fa-user me-1"></i>
-            {{ currentUser.FirstName }} {{ currentUser.LastName }}
-          </a>
-
-          <ul class="dropdown-menu">
-            @if (currentUser) {
-            <li>
-              <a class="dropdown-item" routerLink="/profile">
-                <i class="fa fa-user-circle me-2"></i>My Profile
-              </a>
-            </li>
-            <li>
-              <a class="dropdown-item" routerLink="/orders">
-                <i class="fa fa-box me-2"></i>My Orders
-              </a>
-            </li>
-            }
-            <!--
-              @if (currentUser.isAdmin) {
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+              <i class="fa fa-user me-1"></i>
+              {{ currentUser.FirstName }} {{ currentUser.LastName }}
+            </a>
+            
+            <ul class="dropdown-menu">
+               @if (currentUser) {
                 <li>
-                  <a class="dropdown-item" routerLink="/admin">
-                    <i class="fa fa-cog me-2"></i>Admin Panel
+                  <a class="dropdown-item" routerLink="/profile">
+                    <i class="fa fa-user-circle me-2"></i>My Profile
                   </a>
                 </li>
-              } -->
-
-            <li><hr class="dropdown-divider" /></li>
-            <li>
-              <a class="dropdown-item" href="#" (click)="logout()">
-                <i class="fa fa-sign-out-alt me-2"></i>Logout
-              </a>
-            </li>
-          </ul>
-        </li>
+                <li>
+                  <a class="dropdown-item" routerLink="/orders">
+                    <i class="fa fa-box me-2"></i>My Orders
+                  </a>
+                </li>
+              }
+              <li><hr class="dropdown-divider" /></li>
+              <li>
+                <a class="dropdown-item" href="#" (click)="logout()">
+                  <i class="fa fa-sign-out-alt me-2"></i>Logout
+                </a>
+              </li>
+            </ul>
+          </li>
         } @else {
         <li class="nav-item">
           <a class="nav-link" routerLink="/login">

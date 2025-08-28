@@ -21,23 +21,12 @@ export class Userservice {
     );
   }
 
-  register(
-    userData: IUsers
-  ): Observable<IUsers> {
-    return this.http.post<IUsers>(
-      `${this.apiUrl}/register`,
-      userData
-    );
+  register(userData: IUsers): Observable<IUsers> {
+    return this.http.post<IUsers>(`${this.apiUrl}/register`, userData);
   }
 
-  login(credentials: {
-    email: string;
-    password: string;
-  }): Observable<{ token: string }> {
-    return this.http.post<{ token: string }>(
-      `${this.apiUrl}/login`,
-      credentials
-    );
+  login(credentials: { email: string; password: string }): Observable<{ token: string }> {
+    return this.http.post<{ token: string }>(`${this.apiUrl}/login`, credentials);
   }
 
   saveToken(token: string): void {
@@ -72,7 +61,6 @@ export class Userservice {
       localStorage.setItem('user', JSON.stringify(user));
     }
   }
-
   getUser(): IUsers | null {
     if (!this.canUseStorage) return null;
     const user = localStorage.getItem('user');
@@ -81,5 +69,10 @@ export class Userservice {
     } catch {
       return null;
     }
+  }
+
+  isAdmin(): boolean {
+    const user = this.getUser();
+    return !!user && user.role === 'admin';
   }
 }
