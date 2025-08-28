@@ -1,97 +1,80 @@
-<div class="container mt-4">
-  <h2>Add New Product</h2>
-
-  <form [formGroup]="addForm" (ngSubmit)="onSubmit()">
-
-
-    <div class="mb-3">
-      <label for="name" class="form-label">Name</label>
-      <input type="text" id="name" class="form-control" formControlName="name">
-      @if(formControls['name'].invalid && (formControls['name'].touched || submitted)) {
-        <div class="form-text text-danger">
-          @if(formControls['name'].errors?.['required']) {
-            <span>Name is required</span>
-          }
-          @if(formControls['name'].errors?.['minlength']) {
-            <span>Name must be at least 3 characters</span>
-          }
-          @if(formControls['name'].errors?.['pattern']) {
-            <span>Name must contain letters only</span>
-          }
-        </div>
-      }
+<div class="add-container">
+  <div class="add-card">
+    <div class="add-header">
+      <h2>Add New Product</h2>
     </div>
 
+    <form [formGroup]="addForm" (ngSubmit)="onSubmit()" class="add-form" novalidate>
 
-    <div class="mb-3">
-      <label for="description" class="form-label">Description</label>
-      <input type="text" id="description" class="form-control" formControlName="description">
-      @if(formControls['description'].invalid && (formControls['description'].touched || submitted)) {
-        <div class="form-text text-danger">
-          @if(formControls['description'].errors?.['required']) {
-            <span>Description is required</span>
-          }
-          @if(formControls['description'].errors?.['minlength']) {
-            <span>Description must be at least 5 characters</span>
-          }
-        </div>
-      }
-    </div>
+      <div class="mb-3">
+        <label for="name" class="form-label">Name</label>
+        <input type="text" id="name" class="form-control" formControlName="name">
 
+        @if(formControls['name'].invalid && (formControls['name'].touched || submitted)) {
+          <div class="form-text text-danger">
+            @if(formControls['name'].errors?.['required']) { <span>Name is required</span> }
+            @if(formControls['name'].errors?.['minlength']) { <span>Name must be at least 3 characters</span> }
+            @if(formControls['name'].errors?.['pattern']) { <span>Name must contain letters only</span> }
+          </div>
+        }
+      </div>
 
-    <div class="mb-3">
-      <label for="price" class="form-label">Price</label>
-      <input type="number" id="price" class="form-control" formControlName="price">
-      @if(formControls['price'].invalid && (formControls['price'].touched || submitted)) {
-        <div class="form-text text-danger">
-          @if(formControls['price'].errors?.['required']) {
-            <span>Price is required</span>
-          }
-          @if(formControls['price'].errors?.['min']) {
-            <span>Price must be at least 0</span>
-          }
-        </div>
-      }
-    </div>
+      <div class="mb-3">
+        <label for="description" class="form-label">Description</label>
+        <input type="text" id="description" class="form-control" formControlName="description">
 
+        @if(formControls['description'].invalid && (formControls['description'].touched || submitted)) {
+          <div class="form-text text-danger">
+            @if(formControls['description'].errors?.['required']) { <span>Description is required</span> }
+            @if(formControls['description'].errors?.['minlength']) { <span>Description must be at least 5 characters</span> }
+          </div>
+        }
+      </div>
 
-    <div class="mb-3">
-      <label for="stock" class="form-label">Stock</label>
-      <input type="number" id="stock" class="form-control" formControlName="stock">
-      @if(formControls['stock'].invalid && (formControls['stock'].touched || submitted)) {
-        <div class="form-text text-danger">
-          @if(formControls['stock'].errors?.['required']) {
-            <span>Stock is required</span>
-          }
-          @if(formControls['stock'].errors?.['min']) {
-            <span>Stock cannot be negative</span>
-          }
-        </div>
-      }
-    </div>
-   
-<div class="mb-3">
-  <label for="category" class="form-label">Category</label>
-  <input type="text" id="category" class="form-control" formControlName="category" placeholder="Enter category">
-  @if(formControls['category'].invalid && (formControls['category'].touched || submitted)) {
-    <div class="form-text text-danger">
-      @if(formControls['category'].errors?.['required']) {
-        <span>Category is required</span>
-      }
-    </div>
-  }
-</div>
+      <div class="mb-3">
+        <label for="price" class="form-label">Price</label>
+        <input type="number" id="price" class="form-control" formControlName="price">
 
+        @if(formControls['price'].invalid && (formControls['price'].touched || submitted)) {
+          <div class="form-text text-danger">
+            @if(formControls['price'].errors?.['required']) { <span>Price is required</span> }
+            @if(formControls['price'].errors?.['min']) { <span>Price must be at least 0</span> }
+          </div>
+        }
+      </div>
 
+      <div class="mb-3">
+        <label for="stock" class="form-label">Stock</label>
+        <input type="number" id="stock" class="form-control" formControlName="stock">
 
-    <div class="mb-3">
-      <label for="image" class="form-label">Product Image</label>
-      <input type="file" id="image" class="form-control" (change)="onFileChange($event)">
-    </div>
+        @if(formControls['stock'].invalid && (formControls['stock'].touched || submitted)) {
+          <div class="form-text text-danger">
+            @if(formControls['stock'].errors?.['required']) { <span>Stock is required</span> }
+            @if(formControls['stock'].errors?.['min']) { <span>Stock cannot be negative</span> }
+          </div>
+        }
+      </div>
 
-    <button type="submit" class="btn btn-success w-100" [disabled]="addForm.invalid">
-      Add Product
-    </button>
+      <div class="mb-3">
+        <label for="category" class="form-label">Category</label>
+        <input type="text" id="category" class="form-control" formControlName="category" placeholder="Enter category">
 
-  </form>
+        @if(formControls['category'].invalid && (formControls['category'].touched || submitted)) {
+          <div class="form-text text-danger">
+            @if(formControls['category'].errors?.['required']) { <span>Category is required</span> }
+          </div>
+        }
+      </div>
+
+      <div class="mb-3">
+        <label for="image" class="form-label">Product Image</label>
+        <input type="file" id="image" class="form-control" (change)="onFileChange($event)">
+      </div>
+
+      <button type="submit" class="btn btn-primary w-100" [disabled]="addForm.invalid">
+        Add Product
+      </button>
+
+    </form>
+  </div>
 </div>

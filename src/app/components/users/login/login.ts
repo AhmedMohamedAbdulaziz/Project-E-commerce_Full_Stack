@@ -31,7 +31,7 @@ export class Login {
           this.loading = false;
           this.userservice.saveToken(res.token);
           this.userservice.saveUser(res.user);
-          this.router.navigate(['/prodcuts']); 
+          this.router.navigate(['/products']); 
         },
         error: (err) => {
           this.loading = false;

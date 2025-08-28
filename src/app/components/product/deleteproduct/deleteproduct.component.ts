@@ -29,7 +29,7 @@ export class DeleteProductComponent implements OnInit {
       next: (res) => {
         console.log('Deleted:', res);
         alert('Product deleted successfully!');
-        this.router.navigate(['/']);
+        this.router.navigate(['/products']);
       },
       error: (err) => {
         console.error(' Delete error:', err);
@@ -39,6 +39,7 @@ export class DeleteProductComponent implements OnInit {
   }
 
   cancel() {
-    this.router.navigate(['/']);
+    this.router.navigate(['/products']);
   }
 }
+
