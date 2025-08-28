@@ -20,17 +20,30 @@ export class ProductService {
     return this.http.get<Product>(`${this.baseUrl}/${id}`);
   }
 
-  addProduct(productData: any): Observable<any> {
-    return this.http.post(`${this.baseUrl}`, productData);
-  }
+addProduct(productData: any): Observable<Product> {
+  const token = localStorage.getItem('token');
+  const headers = { Authorization: `Bearer ${token}` };
 
-  updateProduct(id: string, productData: Product | FormData): Observable<any> {
-  return this.http.patch(`${this.baseUrl}/${id}`, productData);
+  return this.http.post<Product>(`${this.baseUrl}`, productData, { headers });
+}
+
+updateProduct(id: string, productData: Product | FormData): Observable<Product> {
+  const token = localStorage.getItem('token');
+  const headers = { Authorization: `Bearer ${token}` };
+
+  return this.http.patch<Product>(`${this.baseUrl}/${id}`, productData, { headers });
 }
 
 
-  deleteProduct(id: string): Observable<any> {
-  return this.http.delete(`${this.baseUrl}/${id}`);
+deleteProduct(id: string): Observable<Product> {
+  const token = localStorage.getItem('token');
+  return this.http.delete<Product>(`${this.baseUrl}/${id}`, {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  });
 }
+
+
 
 }
