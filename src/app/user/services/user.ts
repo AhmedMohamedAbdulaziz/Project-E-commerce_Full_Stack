@@ -25,8 +25,14 @@ export class Userservice {
     return this.http.post<IUsers>(`${this.apiUrl}/register`, userData);
   }
 
-  login(credentials: { email: string; password: string }): Observable<{ token: string }> {
-    return this.http.post<{ token: string }>(`${this.apiUrl}/login`, credentials);
+  login(credentials: {
+    email: string;
+    password: string;
+  }): Observable<{ token: string }> {
+    return this.http.post<{ token: string }>(
+      `${this.apiUrl}/login`,
+      credentials
+    );
   }
 
   saveToken(token: string): void {
