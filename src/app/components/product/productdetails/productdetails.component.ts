@@ -1,16 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { ProductService } from '../../../services/product.service';
 
 import { Product } from '../../../types/products';
-
+import { CartService } from '../../../services/cart';
 @Component({
   selector: 'app-productdetails',
   standalone: true,
   imports: [CommonModule],
   templateUrl: './productdetails.component.html',
-  styleUrls: ['./productdetails.component.css']
+  styleUrls: ['./productdetails.component.css'],
 })
 export class ProductdetailsComponent implements OnInit {
   product: Product | null = null;
@@ -19,7 +19,9 @@ export class ProductdetailsComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private productService: ProductService
+    private productService: ProductService,
+    private cartService: CartService,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -34,8 +36,18 @@ export class ProductdetailsComponent implements OnInit {
           console.error(' Error loading product', err);
           this.error = 'Failed to load product details';
           this.loading = false;
-        }
+        },
       });
     }
+  }
+
+  addToCart(product: Product) {
+    this.cartService.addToCart(product);
+  }
+
+  buyNow(product: Product) {
+    this.cartService.clearCart();
+    this.cartService.addToCart(product);
+    this.router.navigate(['/checkout']);
   }
 }

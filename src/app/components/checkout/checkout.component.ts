@@ -62,11 +62,6 @@ export class CheckoutComponent implements OnInit {
     if (!this.cartService.isUserLoggedIn()) {
       this.router.navigate(['/login']);
     }
-
-    // Update shipping cost when country changes
-    this.checkoutForm.get('country')?.valueChanges.subscribe((country) => {
-      this.selectedCountry = country;
-    });
   }
 
   getCartTotal(): number {
@@ -105,11 +100,8 @@ export class CheckoutComponent implements OnInit {
           this.isProcessing = false;
           this.successMessage = `Order placed successfully! Order number: ${response.order.orderNumber}`;
           this.cartService.clearCart();
-          
-          // Redirect to order confirmation after 3 seconds
-          setTimeout(() => {
-            this.router.navigate(['/orders']);
-          }, 3000);
+
+          this.router.navigate(['/orders']);
         },
         error: (error) => {
           this.isProcessing = false;

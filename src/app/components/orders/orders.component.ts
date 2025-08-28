@@ -1,4 +1,4 @@
-import { CommonModule, CurrencyPipe, DatePipe } from '@angular/common';
+import { CommonModule, CurrencyPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { OrdersService } from '../../services/orders';
@@ -7,7 +7,7 @@ import { Userservice } from '../../user/services/user';
 
 @Component({
   selector: 'app-orders',
-  imports: [CommonModule, CurrencyPipe, DatePipe],
+  imports: [CommonModule, CurrencyPipe],
   templateUrl: './orders.component.html',
   styleUrl: './orders.component.css',
 })
@@ -18,18 +18,17 @@ export class OrdersComponent implements OnInit {
   selectedOrder: Order | null = null;
 
   constructor(
-    private ordersService: OrdersService, 
+    private ordersService: OrdersService,
     private router: Router,
     private userService: Userservice
   ) {}
 
   ngOnInit() {
-    // Check if user is logged in before loading orders
     if (!this.userService.isLoggedIn()) {
       this.router.navigate(['/login']);
       return;
     }
-    
+
     this.loadOrders();
   }
 
@@ -51,7 +50,10 @@ export class OrdersComponent implements OnInit {
       },
       error: (error) => {
         console.error('Error loading orders:', error);
-        if (error.status === 401 || error.message === 'No authentication token found') {
+        if (
+          error.status === 401 ||
+          error.message === 'No authentication token found'
+        ) {
           this.error = 'Please log in to view your orders.';
           this.userService.logout();
           this.router.navigate(['/login']);

@@ -12,6 +12,7 @@ import { DeleteProductComponent } from './components/product/deleteproduct/delet
 import { Cart } from './components/cart/cart';
 import { CheckoutComponent } from './components/checkout/checkout.component';
 import { OrdersComponent } from './components/orders/orders.component';
+import { AboutComponent } from './components/about/about.component';
 
 export const routes: Routes = [
   {
@@ -67,6 +68,11 @@ export const routes: Routes = [
     path: 'orders',
     component: OrdersComponent,
     title: 'My Orders',
+  },
+  {
+    path: 'about',
+    component: AboutComponent,
+    title: 'About Us',
   },
   {
     path: '**',

@@ -1,21 +1,16 @@
-import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
-import { isPlatformBrowser } from '@angular/common';
+import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Order, CreateOrderRequest, OrderResponse } from '../types/orders';
 import { Userservice } from '../user/services/user';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class OrdersService {
   private apiUrl = 'http://localhost:3000/api/orders';
 
-  constructor(
-    private http: HttpClient,
-    private userService: Userservice,
-    @Inject(PLATFORM_ID) private platformId: Object
-  ) {}
+  constructor(private http: HttpClient, private userService: Userservice) {}
 
   private getAuthHeaders(): HttpHeaders {
     const token = this.userService.getToken();
@@ -61,10 +56,9 @@ export class OrdersService {
   // Cancel an order
   cancelOrder(orderId: string): Observable<any> {
     const headers = this.getAuthHeaders();
-    return this.http.delete<any>(
-      `${this.apiUrl}/${orderId}/cancel`,
-      { headers }
-    );
+    return this.http.delete<any>(`${this.apiUrl}/${orderId}/cancel`, {
+      headers,
+    });
   }
 
   // Get all orders (admin only)

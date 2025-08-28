@@ -1,1 +1,39 @@
-<h1 class="text-danger text-center">404 Page Not Found</h1>
+<section class="nf-wrapper" role="main" aria-labelledby="nf-title">
+  <div class="nf-graphic" aria-hidden="true">
+    <div class="orbit">
+      <div class="planet"></div>
+      <div class="ring"></div>
+      <div class="satellite"></div>
+    </div>
+    <span class="code" aria-hidden="true">404</span>
+  </div>
+  <div class="nf-content">
+    <h1 id="nf-title">Page Not Found</h1>
+    <p class="lead">
+      The page you are looking for was moved, removed, renamed or might never
+      have existed.
+    </p>
+    <div class="actions">
+      <a
+        routerLink="/products"
+        class="btn primary"
+        aria-label="Go to products page"
+        >Browse Products</a
+      >
+      @if(!userService.isLoggedIn()){
+      <a routerLink="/login" class="btn outline" aria-label="Go to login page"
+        >Login</a
+      >
+      }
+      <button
+        class="btn ghost"
+        type="button"
+        (click)="goBack()"
+        aria-label="Go back"
+      >
+        Go Back
+      </button>
+    </div>
+    <p class="hint">If you believe this is an error, please try again later.</p>
+  </div>
+</section>
