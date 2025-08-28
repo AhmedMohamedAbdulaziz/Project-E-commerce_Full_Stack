@@ -13,6 +13,7 @@ import { Cart } from './components/cart/cart';
 import { CheckoutComponent } from './components/checkout/checkout.component';
 import { OrdersComponent } from './components/orders/orders.component';
 import { AboutComponent } from './components/about/about.component';
+import { CatComponent } from './components/category/cat.component';
 
 export const routes: Routes = [
   {
@@ -75,7 +76,13 @@ export const routes: Routes = [
     title: 'About Us',
   },
   {
+    path:'category',
+    component:CatComponent,
+    title: 'Category',
+  },
+  {
     path: '**',
     component: NotFound,
   },
+
 ];
