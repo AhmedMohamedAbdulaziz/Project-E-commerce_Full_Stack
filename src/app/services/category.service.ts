@@ -10,33 +10,44 @@ export interface Category {
   providedIn: 'root'
 })
 export class CategoryService {
-
+  
   private baseUrl = 'http://localhost:3000/api/categories';
 
   constructor(private http: HttpClient) {}
 
   // Get all categories
-  getCategories(): Observable<Category[]> {
-    return this.http.get<Category[]>(this.baseUrl);
-  }
+getCategories(): Observable<Category[]> {
+  const token = localStorage.getItem('token');
+  const headers = { Authorization: `Bearer ${token}` };
+  return this.http.get<Category[]>(this.baseUrl, { headers });
+}
 
-  // Get single category
-  getCategoryById(id: string): Observable<Category> {
-    return this.http.get<Category>(`${this.baseUrl}/${id}`);
-  }
+// Get single category
+getCategoryById(id: string): Observable<Category> {
+  const token = localStorage.getItem('token');
+  const headers = { Authorization: `Bearer ${token}` };
+  return this.http.get<Category>(`${this.baseUrl}/${id}`, { headers });
+}
 
-  // Create category
-  createCategory(category: Category): Observable<Category> {
-    return this.http.post<Category>(this.baseUrl, category);
-  }
+// Create category
+createCategory(category: Category): Observable<Category> {
+  const token = localStorage.getItem('token');
+  const headers = { Authorization: `Bearer ${token}` };
+  return this.http.post<Category>(this.baseUrl, category, { headers });
+}
 
-  // Update category
-  updateCategory(id: string, category: Category): Observable<Category> {
-    return this.http.put<Category>(`${this.baseUrl}/${id}`, category);
-  }
+// Update category
+updateCategory(id: string, category: Category): Observable<Category> {
+  const token = localStorage.getItem('token');
+  const headers = { Authorization: `Bearer ${token}` };
+  return this.http.put<Category>(`${this.baseUrl}/${id}`, category, { headers });
+}
 
-  // Delete category
-  deleteCategory(id: string): Observable<any> {
-    return this.http.delete<any>(`${this.baseUrl}/${id}`);
-  }
+// Delete category
+deleteCategory(id: string): Observable<any> {
+  const token = localStorage.getItem('token');
+  const headers = { Authorization: `Bearer ${token}` };
+  return this.http.delete<any>(`${this.baseUrl}/${id}`, { headers });
+}
+
 }
