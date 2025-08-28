@@ -1,1 +1,95 @@
-.navbar-brand { font-weight: bold; font-size: 1.5rem; transition: all 0.3s ease; } .navbar-brand:hover { color: #007bff !important; } .nav-link{ transition: all 0.3s ease; } .nav-link:hover{ color: #007bff !important; } .navbar-nav .nav-link.active{ color: #007bff !important; }
+/* Minimal, professional navbar styling */
+
+nav.navbar {
+	background: #ffffff;
+	border-bottom: 1px solid #e5e7eb; /* light gray */
+	font-size: 0.95rem;
+}
+
+.navbar-brand {
+	font-weight: 600;
+	font-size: 1.3rem;
+	letter-spacing: .5px;
+	display: flex;
+	align-items: center;
+	gap: .4rem;
+	color: #111 !important;
+	transition: color .25s ease;
+}
+
+.navbar-brand:hover {
+	color: #0d6efd !important; /* primary */
+}
+
+.nav-link {
+	position: relative;
+	padding: .55rem .9rem;
+	font-weight: 500;
+	color: #444 !important;
+	transition: color .25s ease;
+}
+
+.nav-link:hover,
+.nav-link:focus {
+	color: #0d6efd !important;
+}
+
+/* Subtle underline hover / active indicator */
+.nav-link::after {
+	content: "";
+	position: absolute;
+	left: 12px;
+	right: 12px;
+	bottom: 6px;
+	height: 2px;
+	background: currentColor;
+	transform: scaleX(0);
+	transform-origin: left;
+	transition: transform .25s ease;
+	opacity: .6;
+}
+
+.nav-link:hover::after,
+.nav-link:focus::after,
+.navbar-nav .nav-link.active::after {
+	transform: scaleX(1);
+}
+
+.navbar-nav .nav-link.active {
+	color: #0d6efd !important;
+}
+
+/* Cart badge sizing */
+.badge {
+	font-size: .65rem;
+	padding: .35em .45em;
+}
+
+/* Dropdown refinements */
+.dropdown-menu {
+	border-radius: .5rem;
+	padding: .4rem 0;
+	font-size: .9rem;
+}
+
+.dropdown-item {
+	display: flex;
+	align-items: center;
+	gap: .5rem;
+}
+
+/* Toggler cleanup */
+.navbar-toggler {
+	border: none;
+	padding: .4rem .6rem;
+}
+
+.navbar-toggler:focus {
+	box-shadow: none;
+}
+
+/* Reduce extra spacing on smaller screens */
+@media (max-width: 991.98px) {
+	.navbar-nav .nav-link { padding: .5rem .75rem; }
+	.dropdown-menu { font-size: .85rem; }
+}

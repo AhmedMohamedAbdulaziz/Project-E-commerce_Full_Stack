@@ -51,6 +51,18 @@
 
         <!-- User Authentication -->
         @if (currentUser) {
+        <!-- Direct action buttons when logged in -->
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/orders">
+            <i class="fa fa-box me-1"></i> My Orders
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#" (click)="logout()">
+            <i class="fa fa-sign-out-alt me-1"></i> Logout
+          </a>
+        </li>
+        <!-- Existing dropdown retained for profile -->
         <li class="nav-item dropdown">
           <a
             class="nav-link dropdown-toggle"
@@ -69,17 +81,12 @@
                 <i class="fa fa-user-circle me-2"></i>My Profile
               </a>
             </li>
-            <li>
-              <a class="dropdown-item" routerLink="/orders">
-                <i class="fa fa-box me-2"></i>My Orders
-              </a>
-            </li>
             }
             <li><hr class="dropdown-divider" /></li>
             <li>
-              <a class="dropdown-item" href="#" (click)="logout()">
-                <i class="fa fa-sign-out-alt me-2"></i>Logout
-              </a>
+              <span class="dropdown-item disabled" style="opacity: 0.6"
+                >Logged in</span
+              >
             </li>
           </ul>
         </li>
