@@ -62,4 +62,11 @@ getUser(): IUsers | null {
   const user = localStorage.getItem('user');
   return user ? JSON.parse(user) : null;
 }
+isAdmin(): boolean {
+  const user = this.getUser();
+  if(user && user.role === 'admin') {
+    return true;
+  }
+  return false;
+}
 }
