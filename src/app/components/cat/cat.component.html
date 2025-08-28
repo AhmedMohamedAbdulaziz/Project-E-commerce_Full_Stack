@@ -1,0 +1,40 @@
+<div class="container mt-5">
+  <div class="card shadow p-4 rounded-3">
+    <h2 class="mb-4 text-center">Add Category</h2>
+
+    <!-- Input & Button -->
+    <div class="input-group">
+      <input  
+        type="text" 
+        class="form-control" 
+        placeholder="Type a category name"
+        [(ngModel)]="newCategory" />
+
+      <button class="btn btn-primary" (click)="addCategory()">
+        Add
+      </button>
+    </div>
+  </div>
+
+  <!-- Display List -->
+  @if (categories.length > 0) {
+  <div class="card mt-4 shadow-sm">
+    <div class="card-header bg-primary text-white">
+      Categories List
+    </div>
+    <ul class="list-group list-group-flush">
+      @for (cat of categories; track cat._id) {
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+          {{ cat.name }}
+          <button class="btn btn-sm btn-outline-danger" (click)="deleteCategory(cat._id!,cat.name)">
+            Remove
+          </button>
+        </li>
+      }
+    </ul>
+  </div>
+} @else {
+  <p class="text-center mt-4 text-muted">No categories added yet.</p>
+}
+
+</div>

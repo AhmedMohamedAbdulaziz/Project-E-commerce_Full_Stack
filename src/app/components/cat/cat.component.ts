@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import Swal from 'sweetalert2';
-import { CategoryService } from '../../services/category.service';
+import { Category, CategoryService } from '../services/category.service';
 
 @Component({
   selector: 'app-cat',
