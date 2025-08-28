@@ -1,0 +1,168 @@
+<div class="checkout-container">
+  <div class="checkout-header">
+    <h1>Checkout</h1>
+    <p>Complete your purchase</p>
+  </div>
+
+  @if (errorMessage) {
+  <div class="error-message">
+    {{ errorMessage }}
+  </div>
+  } @if (successMessage) {
+  <div class="success-message">
+    {{ successMessage }}
+  </div>
+  }
+
+  <div class="checkout-content">
+    <!-- Order Summary -->
+    <div class="order-summary">
+      <h2>Order Summary</h2>
+
+      <div class="cart-items">
+        @for (item of cartItems; track $index) {
+        <div class="cart-item">
+          <div class="item-image">
+            <img [src]="item.product.image" [alt]="item.product.name" />
+          </div>
+          <div class="item-details">
+            <h3>{{ item.product.name }}</h3>
+            <p class="item-price">
+              {{ item.product.price | currency : "EGP " }} × {{ item.quantity }}
+            </p>
+          </div>
+          <div class="item-total">
+            {{ item.product.price * item.quantity | currency : "EGP " }}
+          </div>
+        </div>
+        }
+      </div>
+
+      <div class="order-totals">
+        <div class="total-row">
+          <span>Subtotal:</span>
+          <span>{{ getCartTotal() | currency : "EGP " }}</span>
+        </div>
+        <div class="total-row shipping">
+          <span>Shipping:</span>
+          <span [class.free]="isFreeShipping()">
+            @if (isFreeShipping()) { FREE } @else {
+            {{ getShippingCost() | currency : "EGP " }}
+            }
+          </span>
+        </div>
+        <div class="total-row total">
+          <span>Total:</span>
+          <span>{{ getTotalWithShipping() | currency : "EGP " }}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Checkout Form -->
+    <div class="checkout-form">
+      <h2>Shipping Information</h2>
+
+      <form [formGroup]="checkoutForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="street">Street Address *</label>
+          <input
+            type="text"
+            id="street"
+            formControlName="street"
+            placeholder="Enter your street address"
+            [class.error]="
+              checkoutForm.get('street')?.invalid &&
+              checkoutForm.get('street')?.touched
+            "
+          />
+          @if (getFieldError('street')) {
+          <span class="error-text">{{ getFieldError("street") }}</span>
+          }
+        </div>
+
+        <div class="form-group">
+          <label for="city">City *</label>
+          <input
+            type="text"
+            id="city"
+            formControlName="city"
+            placeholder="Enter your city"
+            [class.error]="
+              checkoutForm.get('city')?.invalid &&
+              checkoutForm.get('city')?.touched
+            "
+          />
+          @if (getFieldError('city')) {
+          <span class="error-text">{{ getFieldError("city") }}</span>
+          }
+        </div>
+
+        <div class="form-group">
+          <label for="country">Country *</label>
+          <select
+            id="country"
+            formControlName="country"
+            [class.error]="
+              checkoutForm.get('country')?.invalid &&
+              checkoutForm.get('country')?.touched
+            "
+          >
+            <option value="Egypt">Egypt</option>
+            <option value="Saudi Arabia">Saudi Arabia</option>
+            <option value="UAE">UAE</option>
+            <option value="Kuwait">Kuwait</option>
+            <option value="Qatar">Qatar</option>
+            <option value="Other">Other</option>
+          </select>
+          @if (getFieldError('country')) {
+          <span class="error-text">{{ getFieldError("country") }}</span>
+          }
+        </div>
+
+        <div class="form-group">
+          <label for="phoneNumber">Phone Number *</label>
+          <input
+            type="tel"
+            id="phoneNumber"
+            formControlName="phoneNumber"
+            placeholder="+201234567890"
+            [class.error]="
+              checkoutForm.get('phoneNumber')?.invalid &&
+              checkoutForm.get('phoneNumber')?.touched
+            "
+          />
+          @if (getFieldError('phoneNumber')) {
+          <span class="error-text">{{ getFieldError("phoneNumber") }}</span>
+          }
+        </div>
+
+        <div class="form-group">
+          <label for="notes">Order Notes (Optional)</label>
+          <textarea
+            id="notes"
+            formControlName="notes"
+            placeholder="Any special instructions for delivery..."
+            rows="3"
+          ></textarea>
+        </div>
+
+        <div class="form-actions">
+          <button type="button" class="btn-secondary" routerLink="/mycart">
+            Back to Cart
+          </button>
+          <button
+            type="submit"
+            class="btn-primary"
+            [disabled]="
+              checkoutForm.invalid || isProcessing || cartItems.length === 0
+            "
+          >
+            @if (isProcessing) {
+            <span class="loading-spinner"></span>
+            Processing... } @else { Place Order }
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,7 +1,7 @@
 <div class="card h-100 shadow-sm border-0 rounded-3">
 
   <img
-    [src]="product.image || 'assets/images/placeholder.png'"
+    [src]="product.image ? 'http://localhost:3000/uploads/' + product.image : 'assets/images/placeholder.png'"
     class="card-img-top product-img"
     alt="{{ product.name }}">
 

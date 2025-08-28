@@ -9,53 +9,67 @@ import { ProductdetailsComponent } from './components/product/productdetails/pro
 import { AddProductComponent } from './components/product/addproduct/addproduct.component';
 import { UpdateproductComponent } from './components/product/updateproduct/updateproduct.component';
 import { DeleteProductComponent } from './components/product/deleteproduct/deleteproduct.component';
-export const routes: Routes = [
-    {
-        path: 'login',
-        component: Login
-    },
-    {
-        path: 'register',
-        component: Register
-    },
-     { path: '',
-       redirectTo: '/login',
-       pathMatch: 'full'
-    },
+import { Cart } from './components/cart/cart';
+import { CheckoutComponent } from './components/checkout/checkout.component';
+import { OrdersComponent } from './components/orders/orders.component';
 
-    {
-        path: 'profile',
-        component: Profile
-    },
-    {
+export const routes: Routes = [
+  {
+    path: 'login',
+    component: Login,
+  },
+  {
+    path: 'register',
+    component: Register,
+  },
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
+
+  {
+    path: 'profile',
+    component: Profile,
+  },
+  {
     path: 'products',
     component: ProductsComponent,
-    title: 'Products Page'
+    title: 'Products Page',
   },
-  { path: 'details/:id',
+  {
+    path: 'details/:id',
     component: ProductdetailsComponent,
-    title: 'Product Details' }
-,
-{
-  path: 'add',
-  component: AddProductComponent,
-  title: 'Add Product'
-},
-
-{
-  path: 'update/:id',
-  component: UpdateproductComponent,
-  title: 'Update Product'
-},
-{
-  path: 'delete/:id',
-  component: DeleteProductComponent,
-  title: 'Delete Product'
-},
-
-
-    {
-        path:'**',
-        component:NotFound
-    }
+    title: 'Product Details',
+  },
+  {
+    path: 'add',
+    component: AddProductComponent,
+    title: 'Add Product',
+  },
+  {
+    path: 'update/:id',
+    component: UpdateproductComponent,
+    title: 'Update Product',
+  },
+  {
+    path: 'delete/:id',
+    component: DeleteProductComponent,
+    title: 'Delete Product',
+  },
+  {
+    path: 'mycart',
+    component: Cart,
+    title: 'My Cart',
+  },
+  {
+    path: 'checkout',
+    component: CheckoutComponent,
+    title: 'Checkout',
+  },
+  {
+    path: 'orders',
+    component: OrdersComponent,
+    title: 'My Orders',
+  },
+  {
+    path: '**',
+    component: NotFound,
+  },
 ];

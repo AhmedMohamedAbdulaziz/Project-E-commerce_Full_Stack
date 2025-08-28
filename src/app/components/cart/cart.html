@@ -1,0 +1,114 @@
+@if (cartItems.length) {
+<div class="cart-container">
+  <h1 class="cart-title">Shopping Cart</h1>
+
+  <div class="cart-table" role="table" aria-label="Shopping cart items">
+    <div class="cart-header" role="row">
+      <div class="col col-product" role="columnheader">Product</div>
+      <div class="col col-description" role="columnheader">Description</div>
+      <div class="col col-qty" role="columnheader">Quantity</div>
+      <div class="col col-price" role="columnheader">Price</div>
+      <div class="col col-remove" role="columnheader">Remove</div>
+    </div>
+
+    @for (item of cartItems; track $index) {
+    <div class="cart-row" role="row">
+      <div class="col col-product" role="cell">
+        <img
+          [src]="item.product.image"
+          [alt]="item.product.name"
+          class="product-thumb"
+        />
+      </div>
+      <div class="col col-description" role="cell">
+        <div class="prod-title">{{ item.product.name }}</div>
+        <div class="prod-description">{{ item.product.description }}</div>
+      </div>
+      <div class="col col-qty" role="cell">
+        <div class="qty-control" aria-label="Quantity selector">
+          <button
+            class="qty-btn sub"
+            type="button"
+            (click)="updateQuantity(item.product._id, item.quantity - 1)"
+            aria-label="Decrease quantity"
+            [disabled]="item.quantity <= 1"
+          >
+            -
+          </button>
+          <div class="qty-value" aria-live="polite">{{ item.quantity }}</div>
+          <button
+            class="qty-btn add"
+            type="button"
+            (click)="updateQuantity(item.product._id, item.quantity + 1)"
+            aria-label="Increase quantity"
+          >
+            +
+          </button>
+        </div>
+      </div>
+      <div class="col col-price" role="cell">
+        <div class="price-info">
+          <div class="unit-price">
+            {{ item.product.price | currency : "EGP " }}
+          </div>
+          <div class="item-total">
+            {{ getItemSubtotal(item) | currency : "EGP " }}
+          </div>
+        </div>
+      </div>
+      <div class="col col-remove" role="cell">
+        <button
+          class="remove-btn"
+          type="button"
+          (click)="removeFromCart(item.product._id)"
+          aria-label="Remove item"
+        >
+          ×
+        </button>
+      </div>
+    </div>
+    }
+  </div>
+
+  <div class="cart-footer">
+    <div class="cart-summary">
+      <div class="summary-row">
+        <span>Items ({{ cartCount }}):</span>
+        <span>{{ getCartTotal() | currency : "EGP " }}</span>
+      </div>
+      <div class="summary-row total">
+        <span>Total:</span>
+        <span>{{ getCartTotal() | currency : "EGP " }}</span>
+      </div>
+    </div>
+
+    <div class="cart-actions">
+      <button class="btn-secondary" type="button" (click)="continueShopping()">
+        Continue Shopping
+      </button>
+      <button class="btn-clear" type="button" (click)="clearCart()">
+        Clear Cart
+      </button>
+      <button
+        class="btn-checkout"
+        type="button"
+        (click)="proceedToCheckout()"
+        [disabled]="isCartEmpty()"
+      >
+        @if (isUserLoggedIn) { Proceed to Checkout } @else { Login to Checkout }
+      </button>
+    </div>
+  </div>
+</div>
+} @else {
+<div class="empty-cart">
+  <div class="empty-cart-content">
+    <div class="empty-cart-icon">🛒</div>
+    <h2>Your cart is empty</h2>
+    <p>Looks like you haven't added any products to your cart yet.</p>
+    <button class="btn-primary" type="button" (click)="continueShopping()">
+      Start Shopping
+    </button>
+  </div>
+</div>
+}
