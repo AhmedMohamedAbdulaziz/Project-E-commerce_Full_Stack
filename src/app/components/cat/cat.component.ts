@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import Swal from 'sweetalert2';
-import { Category, CategoryService } from '../services/category.service';
+// Fixed relative path to services folder (two levels up from /components/cat)
+import { Category, CategoryService } from '../../services/category.service';
 
 @Component({
   selector: 'app-cat',
+  standalone: true,
   imports: [FormsModule],
   templateUrl: './cat.component.html',
   styleUrl: './cat.component.css'
